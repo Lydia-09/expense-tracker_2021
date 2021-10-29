@@ -2,6 +2,10 @@
 const express = require('express')
 const app = express()
 
+// 載入 mongoose
+const mongoose = require('mongoose') 
+require('./config/mongoose')
+
 // 設定首頁路由
 app.get('/', (req, res) => {
   res.send('hello world')
