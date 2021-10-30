@@ -13,6 +13,10 @@ const expenseSchema = new Schema({
   amount: {
     type: Number,
     require: true
+  },
+  category: {
+    type: String,
+    required: true
   }
 })
 

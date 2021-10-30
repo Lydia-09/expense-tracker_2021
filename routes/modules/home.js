@@ -3,7 +3,7 @@ const router = express.Router()
 const Expense = require('../../models/expense')
 
 router.get('/', (req, res) => {
-  Expense.find()
+  Expense.find( )
     .lean()
     .then(expenses => res.render('index',  { expenses }))
     .catch(error => console.error(error))

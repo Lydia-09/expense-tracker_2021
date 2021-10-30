@@ -24,12 +24,13 @@ router.get('/:id/edit', (req, res) => {
 
 router.post('/:id/edit', (req, res) => {
   const id = req.params.id
-  const { name, date, amount} = req.body
+  const { name, date, amount, category} = req.body
   return Expense.findById(id)
     .then(expense => {
       expense.name = name
       expense.date = date
       expense.amount = amount
+      expense.category = category
       return expense.save()
     })
     .then(()=> res.redirect(`/expenses/${id}`))
@@ -45,8 +46,8 @@ router.post('/:id/delete', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  const { name, date, amount} = req.body
-  return Expense.create({  name, date, amount })
+  const { name, date, amount, category} = req.body
+  return Expense.create({  name, date, amount, category })
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
