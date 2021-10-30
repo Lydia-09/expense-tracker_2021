@@ -36,6 +36,14 @@ router.post('/:id/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 
+router.post('/:id/delete', (req, res) => {
+  const id = req.params.id
+  return Expense.findById(id)
+    .then(expense => expense.remove())
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
+
 router.post('/', (req, res) => {
   const { name, date, amount} = req.body
   return Expense.create({  name, date, amount })
