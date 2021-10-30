@@ -22,7 +22,7 @@ router.get('/:id/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 
-router.post('/:id/edit', (req, res) => {
+router.put('/:id', (req, res) => {
   const id = req.params.id
   const { name, date, amount, category} = req.body
   return Expense.findById(id)
@@ -37,7 +37,7 @@ router.post('/:id/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 
-router.post('/:id/delete', (req, res) => {
+router.delete('/:id', (req, res) => {
   const id = req.params.id
   return Expense.findById(id)
     .then(expense => expense.remove())

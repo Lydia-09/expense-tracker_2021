@@ -2,6 +2,7 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 
 // 載入 mongoose
 require('./config/mongoose')
@@ -16,6 +17,8 @@ app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs', helpers: requ
 app.set('view engine', 'hbs')
 
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(methodOverride('_method'))
+
 app.use(routes)
 
 // 設定 port 3000

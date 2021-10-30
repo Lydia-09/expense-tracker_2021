@@ -1,4 +1,4 @@
-<form action="/expenses/{{ expense._id }}/edit" method="POST">
+<form action="/expenses/{{ expense._id }}?_method=PUT" method="POST">
   <input type="text" placeholder="name" name="name" value="{{ expense.name }}">
   <input type="date" id="date" name="date" class="form-control" value="{{ dateFormate expense.date }}" required>
   <input type="number" placeholder="number" name="amount" value="{{ expense.amount }}">
