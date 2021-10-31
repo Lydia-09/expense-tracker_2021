@@ -1,3 +1,23 @@
+<form action="/filter" class="row" id="filter" onchange="filter.submit()">
+  <div class="form-group col-8 my-3 ml-1">
+    <select class="form-control form-control-sm" id="category" name="category">
+      <option value="全部" {{{isSelected category '全部' }}}>依照類別篩選</option>
+      <option value="家居物業" {{{isSelected category '家居物業' }}}>家居物業</option>
+      <option value="交通出行" {{{isSelected category '交通出行' }}}>交通出行</option>
+      <option value="休閒娛樂" {{{isSelected category '休閒娛樂' }}}>休閒娛樂</option>
+      <option value="餐飲食品" {{{isSelected category '餐飲食品' }}}>餐飲食品</option>
+      <option value="其他" {{{isSelected category '其他' }}}>其他</option>
+    </select>
+  </div>
+</form>
+<div class="row mx-1">
+  <div class="col-12 bg-secondary rounded pt-3">
+    <h4 class="text-light">總金額：</h4>
+    <h1 class="text-right text-warning">$<spn class="totalAmount">{{totalAmount expenses}}</spn>
+    </h1>
+  </div>
+</div>
+
 <form class="mt-3 mr-1" action="/" method="GET" id="Sorting">
   <div class="form-group">
     <label for="sort" class="mr-1">排序方式</label>
@@ -16,7 +36,7 @@
 <ul>
   {{#each expenses}}
   <li>
-    <i class="{{ this.icon }}"></i>
+    <i class="{{ this.icon }} fa-2x mr-5"></i>
     {{ this.name }}, {{ dateFormate this.date }}, {{ this.amount }}
     <a href="./expenses/{{ this._id }}">detail</a>
     <a href="./expenses/{{ this._id }}/edit">edit</a>

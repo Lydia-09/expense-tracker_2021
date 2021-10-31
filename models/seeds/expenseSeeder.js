@@ -1,24 +1,20 @@
 const db = require('../../config/mongoose')
 const Expense = require('../expense')
-// const seedData = require('./expense.json')
+const Category = require('../category')
 const { recordSeed } = require('./expense.json')
 
-db.once('open', () => {
-  Expense.create(recordSeed)
-    .then(() => {
-      console.log('record seed data create done!')
-      return db.close()
+db.once('open', async () => {
+  try {
+    // 取得支出類別，並寫入 recordSeed
+    const categoryData = await Category.find().lean().select('name')
+    recordSeed.forEach(expense => {
+      expense.categoryId = categoryData.find(category => expense.category === category.name)._id  
     })
-    .then(() => {
-      console.log('database connection close.')
-    })
-  // seedData.results.forEach((item) => {
-  //   Expense.create({
-  //     name: item.name,
-  //     date: item.date,
-  //     amount: item.amount,
-  //     category: item.category
-  //   })
-  // })
-  // console.log('Seed data created done! Ctrl+C to Exit.')
+    await Expense.create(recordSeed)
+    console.log('record seed data create done!')
+    console.log('database connection close.')
+    return process.exit()
+  } catch (e) {
+    console.warn(e)
+  }
 })

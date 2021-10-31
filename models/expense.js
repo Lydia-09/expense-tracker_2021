@@ -14,8 +14,11 @@ const expenseSchema = new Schema({
     type: Number,
     require: true
   },
-  category: {
-    type: String,
+  // 加入關聯設定
+  categoryId: {
+    type: Schema.Types.ObjectId,
+    ref: 'Category',
+    index: true,
     required: true
   }
 })
