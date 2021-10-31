@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
-
-mongoose.connect('mongodb://localhost/expense-tracker')
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/expense-tracker'
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 
 // 設定:資料庫連線
 const db = mongoose.connection
